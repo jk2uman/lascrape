@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var lascrapper = new Schema({
+var lascraper = new Schema({
     title: {
         type: String,
     },
@@ -10,5 +10,5 @@ var lascrapper = new Schema({
     }
 });
 
-var Note = mongoose.model("Note", lascrapper);
+var Note = mongoose.model("Note", lascraper);
 module.exports = Note;
