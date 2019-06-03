@@ -10,19 +10,12 @@ var cheerio = require("cheerio");
 var request = require("request");
 
 // Mongoose
-
+require("./config")
 var Note = require("./models/Note");
 var Article = require("./models/Article");
-var databaseUrl = 'mongodb:';
 
-if (process.env.MONGODB_URI) {
-    mongoose.connect(process.env.MONGODB_URI);
-}
-else {
-    mongoose.connect(databaseUrl);
-};
 
-mongoose.Promise = Promise;
+/*mongoose.Promise = Promise;
 var db = mongoose.connection;
 
 db.on("error", function (error) {
@@ -31,8 +24,7 @@ db.on("error", function (error) {
 
 db.once("open", function () {
     console.log("Mongoose connection successful.");
-});
-
+});*/
 
 var app = express();
 var port = process.env.PORT || 3000;
