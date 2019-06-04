@@ -15,7 +15,7 @@ var Note = require("./models/Note");
 var Article = require("./models/Article");
 
 
-/*mongoose.Promise = Promise;
+mongoose.Promise = Promise;
 var db = mongoose.connection;
 
 db.on("error", function (error) {
@@ -24,7 +24,7 @@ db.on("error", function (error) {
 
 db.once("open", function () {
     console.log("Mongoose connection successful.");
-});*/
+});
 
 var app = express();
 var port = process.env.PORT || 3000;
