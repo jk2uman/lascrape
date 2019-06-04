@@ -1,5 +1,5 @@
 // Dependencies
-
+var axios = require("axios");
 var express = require("express");
 var method = require("method-override");
 var body = require("body-parser");
@@ -56,8 +56,10 @@ app.get("/", function (req, res) {
 });
 
 app.get("/scrape", function (req, res) {
-    request("https://www.latimes.com/entertainment/music", function (error, response, html) {
-        var $ = cheerio.load(html);
+    console.log("scrape");
+    axios.get("https://www.latimes.com/entertainment/music").then(function (response) {
+        console.log(response);
+        var $ = cheerio.load(response.data);
         var result = {};
         $("div.story-body").each(function (i, element) {
             var link = $(element).find("a").attr("href");
