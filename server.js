@@ -58,14 +58,13 @@ app.get("/", function (req, res) {
 app.get("/scrape", function (req, res) {
     console.log("scrape");
     axios.get("https://www.latimes.com/entertainment/music").then(function (response) {
-        console.log(response);
         var $ = cheerio.load(response.data);
         var result = {};
-        $("div.story-body").each(function (i, element) {
+        $(".card").each(function (i, element) {
             var link = $(element).find("a").attr("href");
-            var title = $(element).find("h2.headline").text().trim();
+            var title = $(element).find("a").text().trim();
             var summary = $(element).find("p.summary").text().trim();
-            var img = $(element).parent().find("figure.media").find("img").attr("src");
+            var img = $(element).parent().find("img").attr("src");
             result.link = link;
             result.title = title;
             if (summary) {
@@ -77,6 +76,8 @@ app.get("/scrape", function (req, res) {
             else {
                 result.img = $(element).find(".wide-thumb").find("img").attr("src");
             };
+            console.log("-----------------------------------------------------")
+            console.log(result);
             var entry = new Article(result);
             Article.find({ title: result.title }, function (err, data) {
                 if (data.length === 0) {
