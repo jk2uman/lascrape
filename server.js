@@ -63,8 +63,8 @@ app.get("/scrape", function (req, res) {
         $(".card").each(function (i, element) {
             var link = $(element).find("a").attr("href");
             var title = $(element).find("a").text().trim();
-            var summary = $(element).find("p.summary").text().trim();
-            var img = $(element).parent().find("img").attr("src");
+            var summary = $(element).find("a").text().trim();
+            var img = $(element).parent().find("figure.media").find("img").attr("src");
             result.link = link;
             result.title = title;
             if (summary) {
