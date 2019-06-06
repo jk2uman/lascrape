@@ -1,5 +1,6 @@
 // Warnings do not click scrape for newest articles it will crash the heroku app 
 // Clicking the Article link will not send you to the actual article still trying to solve that problem
+// Images for the articles will not appear working on fixing it 
 // Dependencies
 var axios = require("axios");
 var express = require("express");
@@ -62,6 +63,7 @@ app.get("/scrape", function (req, res) {
     axios.get("https://www.latimes.com/entertainment/music").then(function (response) {
         var $ = cheerio.load(response.data);
         var result = {};
+        console.log('this')
         $(".flex-grid").each(function (i, element) {
             var link = $(element).find("a").attr("href");
             var title = $(element).find("h5").text().trim();
@@ -78,16 +80,16 @@ app.get("/scrape", function (req, res) {
                 result.img = img;
             }
             else {
-                result.img = $(element).find(".wide-thumb").find("img").attr("src");
+                result.img = $(element).find("img").attr("src");
             };
-            var entry = new Article(result);
-            Article.find({ title: result.title }, function (err, data) {
-                if (data.length === 0) {
-                    entry.save(function (err, data) {
-                        if (err) throw err;
-                    });
-                }
-            });
+            // var entry = new Article(result);
+            // Article.find({ title: result.title }, function (err, data) {
+            //     if (data.length === 0) {
+            //         entry.save(function (err, data) {
+            //             if (err) throw err;
+            //         });
+            //     }
+            // });
         });
         console.log("Scrape finished.");
         res.redirect("/");
