@@ -1,4 +1,5 @@
-//
+// Warnings do not click scrape for newest articles it will crash the heroku app 
+// Clicking the Article link will not send you to the actual article still trying to solve that problem
 // Dependencies
 var axios = require("axios");
 var express = require("express");
@@ -79,8 +80,6 @@ app.get("/scrape", function (req, res) {
             else {
                 result.img = $(element).find(".wide-thumb").find("img").attr("src");
             };
-            console.log("-----------------------------------------------------")
-            //console.log(result);
             var entry = new Article(result);
             Article.find({ title: result.title }, function (err, data) {
                 if (data.length === 0) {
